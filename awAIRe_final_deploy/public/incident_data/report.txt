@@ -1,0 +1,38 @@
+INCIDENT REPORT: HAZMAT RELEASE - LEE HIGHWAY, MANASSAS, VA
+DATE: June 4, 2016
+TIME: 15:00 (3:00 PM) EDT
+LOCATION: Southern Railway crossing at Lee Highway (US Route 29), near Manassas, VA.
+INCIDENT TYPE: Transportation accident leading to hazardous material release (chlorine gas).
+
+INCIDENT SUMMARY
+At 15:00 on June 4, 2016, a freight train collided with a stalled truck at the Lee Highway (US-29) railway crossing. The truck was carrying three 150-pound chlorine cylinders. The collision damaged all cylinders, resulting in the simultaneous release of pressurized liquid chlorine, which vaporized into a gas cloud. Two highway maintenance workers conducting pothole repairs approximately 1.8 km west of the John Marshall Highway (SR-55)/Lee Highway intersection were overcome by the gas and required hospitalization for chlorine inhalation.
+
+ENVIRONMENTAL CONDITIONS
+-Wind: Easterly at 6 mph (2.7 m/s), measured at 3 m height.
+-Temperature: 72°F (22.2°C).
+-Humidity: 80%.
+-Cloud Cover: 1/3 (scattered clouds).
+-Atmospheric Stability: Neutral (Pasquill Stability Class D). No low-level inversion present.
+-Terrain: Flat, open land with no obstructions between the release site and the worker location.
+
+DAMAGE & CASUALTIES
+Material Damage: Train and truck severely damaged; three chlorine cylinders breached.
+
+Injuries: Two highway maintenance workers exposed to chlorine gas at Lee Highway, ~1.8 km west of SR-55 intersection. Symptoms included respiratory distress, coughing, and mucosal irritation. Transported to local hospital for treatment.
+
+ANALYSIS OF CHLORINE EXPOSURE
+Using the Gaussian Puff Dispersion Model for a neutral atmosphere (Class D) and an instantaneous release:
+
+Release Parameters:
+Total chlorine released: 3 cylinders × 150 lbs = 450 lbs (204 kg).
+
+Effective release height: Ground level (truck bed).
+
+
+RECOMMENDATIONS
+Immediate evacuation and medical intervention were critical. Secure accident site; conduct decontamination.
+Implement real-time atmospheric monitoring during future hazmat responses.
+
+REPORT FILED BY: [Agency/Department Name]
+DATE: June 5, 2016
+

@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configure Threat Simulation - Threat Warning Dashboard</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="configure-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="configure-page">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="header-left">
+                    <div class="logo">
+                        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/>
+                            <path d="M12 9v4"/>
+                            <path d="M12 17h.01"/>
+                        </svg>
+                    </div>
+                    <div class="header-title">
+                        <h1>Configure Threat Simulation</h1>
+                        <p>Set up incident parameters and deployment settings</p>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <button class="btn-secondary" onclick="window.location.href='/'">
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 12H5"/>
+                            <path d="M12 19l-7-7 7-7"/>
+                        </svg>
+                        Back to Dashboard
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="configuration-container">
+                <!-- Progress Steps -->
+                <div class="progress-steps">
+                    <div class="step active" data-step="1">
+                        <div class="step-number">1</div>
+                        <div class="step-label">Incident Details</div>
+                    </div>
+                    <div class="step" data-step="2">
+                        <div class="step-number">2</div>
+                        <div class="step-label">Weather Data</div>
+                    </div>
+                    <div class="step" data-step="3">
+                        <div class="step-number">3</div>
+                        <div class="step-label">Simulation Settings</div>
+                    </div>
+                    <div class="step" data-step="4">
+                        <div class="step-number">4</div>
+                        <div class="step-label">Deployment</div>
+                    </div>
+                </div>
+
+                <!-- Form Container -->
+                <div class="form-container">
+                    <!-- Step 1: Incident Details -->
+                    <div class="form-step active" id="step-1">
+                        <div class="step-header">
+                            <h2>Incident Details</h2>
+                            <p>Provide information about the incident or upload a report</p>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>Incident Information</h3>
+                            <div class="form-group">
+                                <label for="incident-type">Incident Type</label>
+                                <select id="incident-type" class="form-control">
+                                    <option value="">Select incident type</option>
+                                    <option value="chemical">Chemical Release</option>
+                                    <option value="fire">Fire/Explosion</option>
+                                    <option value="nuclear">Nuclear/Radiological</option>
+                                    <option value="biological">Biological Agent</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="incident-location">Location</label>
+                                    <input type="text" id="incident-location" class="form-control" placeholder="Enter address or coordinates">
+                                </div>
+                                <div class="form-group">
+                                    <label for="incident-time">Incident Time</label>
+                                    <input type="datetime-local" id="incident-time" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="chemical-name">Chemical/Substance Name</label>
+                                <input type="text" id="chemical-name" class="form-control" placeholder="e.g., Chlorine, Ammonia, etc.">
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="release-rate">Release Rate</label>
+                                    <input type="text" id="release-rate" class="form-control" placeholder="e.g., 10 kg/min">
+                                </div>
+                                <div class="form-group">
+                                    <label for="release-duration">Estimated Duration</label>
+                                    <input type="text" id="release-duration" class="form-control" placeholder="e.g., 2 hours">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            
+                            <h3>Incident Report/Article</h3>
+                            <div class="upload-options">
+                                 <div class="upload-option" onclick="location.href='http://localhost:3000/';">
+                                    <label class="upload-label">
+                                        <input type="radio" name="input-method">
+                                        <div class="upload-content">
+                                            <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                                <polyline points="7,10 12,15 17,10"/>
+                                                <line x1="12" y1="15" x2="12" y2="3"/>
+                                            </svg>
+                                            <h4>Upload File</h4>
+                                            <p>PDF, TXT, or KML file</p>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="upload-option">
+                                    <label class="upload-label">
+                                        <input type="radio" name="input-method">
+                                        <div class="upload-content">
+                                            <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                                <polyline points="14,2 14,8 20,8"/>
+                                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                                <line x1="16" y1="17" x2="8" y2="17"/>
+                                                <polyline points="10,9 9,9 8,9"/>
+                                            </svg>
+                                            <h4>Enter Text</h4>
+                                            <p>Type or paste incident report</p>
+                                        </div>
+                                    </label>
+                                </div>
+                               
+                                <div class="upload-option" style="display: none;">
+                                    <label class="upload-label">
+                                        <input type="radio" name="input-method" value="url">
+                                        <div class="upload-content">
+                                            <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                                                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                                            </svg>
+                                            <h4>From URL</h4>
+                                            <p>Link to news article or report</p>
+                                        </div>
+                                    </label>
+                                    
+                                </div>
+                                
+                            </div>
+                            <p id="upload_info">Uploaded File:</p>
+                            <button id="upload_link" onclick="openFile()" class="navigation_button">View Data</button>
+
+                            <div class="input-area" id="text-input" style="display: none;">
+                                <label for="incident-report">Incident Report/Description</label>
+                                <textarea id="incident-report" class="form-control" rows="6" placeholder="Enter detailed incident report, news article, or description..."></textarea>
+                            </div>
+
+                            <div class="input-area" id="file-input" style="display: none;">
+                                <label for="report-file">Upload Report File</label>
+                                <div class="file-upload-area">
+                                    <input type="file" id="report-file" accept=".pdf,.doc,.docx,.txt" hidden>
+                                    <div class="file-upload-content">
+                                        <svg class="file-upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                            <polyline points="7,10 12,15 17,10"/>
+                                            <line x1="12" y1="15" x2="12" y2="3"/>
+                                        </svg>
+                                        <p>Click to upload or drag and drop</p>
+                                        <small>PDF, DOC, DOCX, TXT (max 10MB)</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="input-area" id="url-input" style="display: none;">
+                                <label for="report-url">Article/Report URL</label>
+                                <input type="url" id="report-url" class="form-control" placeholder="https://example.com/incident-report">
+                                <button type="button" class="btn-secondary mt-2">Fetch Content</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Weather Data -->
+                    <div class="form-step" id="step-2">
+                        <div class="step-header">
+                            <h2>Weather Information</h2>
+                            <p>Provide current weather conditions or use live data</p>
+                        </div>
+
+                        <div class="weather-options">
+                            <div class="weather-option">
+                                <label class="weather-label" onclick="weatherUpdate()">
+                                    <input type="radio" name="weather-method" value="live" checked>
+                                    <div class="weather-content">
+                                        <svg class="weather-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>
+                                        </svg>
+                                        <h4>Live Weather Data</h4>
+                                        <p>Real-time from WeatherXM</p>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="weather-option">
+                                <label class="weather-label">
+                                    <input type="radio" name="weather-method" value="manual">
+                                    <div class="weather-content">
+                                        <svg class="weather-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M12 2v2"/>
+                                            <path d="M12 20v2"/>
+                                            <path d="M4.93 4.93l1.41 1.41"/>
+                                            <path d="M17.66 17.66l1.41 1.41"/>
+                                            <path d="M2 12h2"/>
+                                            <path d="M20 12h2"/>
+                                            <path d="M6.34 17.66l-1.41 1.41"/>
+                                            <path d="M19.07 4.93l-1.41 1.41"/>
+                                        </svg>
+                                        <h4>Manual Entry</h4>
+                                        <p>Enter specific weather conditions</p>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="weather-data" id="live-weather">
+                            <div class="weather-status">
+                                <div class="weather-loading">
+                                    <div class="spinner"></div>
+                                    <p>Fetching live weather data for incident location...</p>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                        <div class="weather-data" id="manual-weather" style="display: none;">
+                            <div class="form-section">
+                                <h3>Weather Conditions</h3>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="wind-speed">Wind Speed</label>
+                                        <div class="input-with-unit">
+                                            <input type="number" id="wind-speed" class="form-control" placeholder="10">
+                                            <select class="unit-select">
+                                                <option value="mph">mph</option>
+                                                <option value="kph">km/h</option>
+                                                <option value="ms">m/s</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="wind-direction">Wind Direction</label>
+                                        <select id="wind-direction" class="form-control">
+                                            <option value="N">North</option>
+                                            <option value="NE">Northeast</option>
+                                            <option value="E">East</option>
+                                            <option value="SE">Southeast</option>
+                                            <option value="S">South</option>
+                                            <option value="SW">Southwest</option>
+                                            <option value="W">West</option>
+                                            <option value="NW">Northwest</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="temperature">Temperature</label>
+                                        <div class="input-with-unit">
+                                            <input type="number" id="temperature" class="form-control" placeholder="72">
+                                            <select class="unit-select">
+                                                <option value="F">°F</option>
+                                                <option value="C">°C</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="humidity">Humidity</label>
+                                        <div class="input-with-unit">
+                                            <input type="number" id="humidity" class="form-control" placeholder="65" min="0" max="100">
+                                            <span class="unit-label">%</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="pressure">Atmospheric Pressure</label>
+                                        <div class="input-with-unit">
+                                            <input type="number" id="pressure" class="form-control" placeholder="1013">
+                                            <select class="unit-select">
+                                                <option value="hPa">hPa</option>
+                                                <option value="inHg">inHg</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="visibility">Visibility</label>
+                                        <div class="input-with-unit">
+                                            <input type="number" id="visibility" class="form-control" placeholder="10">
+                                            <select class="unit-select">
+                                                <option value="mi">miles</option>
+                                                <option value="km">km</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Simulation Settings -->
+                    <div class="form-step" id="step-3">
+                        <div class="step-header">
+                            <h2>Simulation Settings</h2>
+                            <p>Choose simulation complexity and modeling parameters</p>
+                        </div>
+
+                        <div class="form-section" style="display: none;">
+                            <h3>Simulation Tier</h3>
+                            <div class="tier-options">
+                                <div class="tier-option">
+                                    <label class="tier-label">
+                                        <input type="radio" name="simulation-tier" value="base" checked>
+                                        <div class="tier-card">
+                                            <div class="tier-header">
+                                                <h4>Base</h4>
+                                                <div class="tier-price">$29</div>
+                                            </div>
+                                            <div class="tier-features">
+                                                <ul>
+                                                    <li>Basic dispersion modeling</li>
+                                                    <li>Standard threat zones</li>
+                                                    <li>Static weather conditions</li>
+                                                    <li>24-hour simulation</li>
+                                                    <li>PDF report generation</li>
+                                                </ul>
+                                            </div>
+                                            <div class="tier-badge">Most Popular</div>
+                                        </div>
+                                    </label>
+                                </div>
+
+                                <div class="tier-option">
+                                    <label class="tier-label">
+                                        <input type="radio" name="simulation-tier" value="dynamic">
+                                        <div class="tier-card">
+                                            <div class="tier-header">
+                                                <h4>Dynamic</h4>
+                                                <div class="tier-price">$79</div>
+                                            </div>
+                                            <div class="tier-features">
+                                                <ul>
+                                                    <li>Advanced dispersion modeling</li>
+                                                    <li>Dynamic threat zones</li>
+                                                    <li>Real-time weather updates</li>
+                                                    <li>72-hour simulation</li>
+                                                    <li>Interactive visualizations</li>
+                                                    <li>Multiple scenario analysis</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+
+                                <div class="tier-option">
+                                    <label class="tier-label">
+                                        <input type="radio" name="simulation-tier" value="expert">
+                                        <div class="tier-card">
+                                            <div class="tier-header">
+                                                <h4>Expert</h4>
+                                                <div class="tier-price">$199</div>
+                                            </div>
+                                            <div class="tier-features">
+                                                <ul>
+                                                    <li>Expert-validated modeling</li>
+                                                    <li>Custom threat parameters</li>
+                                                    <li>Meteorological analysis</li>
+                                                    <li>Unlimited simulation time</li>
+                                                    <li>Expert consultation included</li>
+                                                    <li>Regulatory compliance reports</li>
+                                                    <li>API access</li>
+                                                </ul>
+                                            </div>
+                                            <div class="tier-badge expert">Professional</div>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>Modeling Parameters</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="simulation-duration">Simulation Duration</label>
+                                    <select id="simulation-duration" class="form-control">
+                                        <option value="6">6 hours</option>
+                                        <option value="12">12 hours</option>
+                                        <option value="24" selected>24 hours</option>
+                                        <option value="48">48 hours</option>
+                                        <option value="72">72 hours</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="update-frequency">Update Frequency</label>
+                                    <select id="update-frequency" class="form-control">
+                                        <option value="15">Every 15 minutes</option>
+                                        <option value="30" selected>Every 30 minutes</option>
+                                        <option value="60">Every hour</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="include-terrain">
+                                    <span class="checkmark"></span>
+                                    Include terrain effects in modeling
+                                </label>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="include-buildings">
+                                    <span class="checkmark"></span>
+                                    Account for building wake effects
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Deployment Settings -->
+                    <div class="form-step" id="step-4">
+                        <div class="step-header">
+                            <h2>Deployment Settings</h2>
+                            <p>Configure access permissions and sharing options</p>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>Access Control</h3>
+                            <div class="access-options">
+                                <div class="access-option">
+                                    <label class="access-label">
+                                        <input type="radio" name="access-type" value="public" checked>
+                                        <div class="access-content">
+                                            <svg class="access-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                                                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                                            </svg>
+                                            <div>
+                                                <h4>Anyone with Link</h4>
+                                                <p>Public access via shareable link</p>
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+
+                                <div class="access-option">
+                                    <label class="access-label">
+                                        <input type="radio" name="access-type" value="geographic">
+                                        <div class="access-content">
+                                            <svg class="access-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                                <circle cx="12" cy="10" r="3"/>
+                                            </svg>
+                                            <div>
+                                                <h4>Geographic Restriction</h4>
+                                                <p>Limit access by location proximity</p>
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+
+                                <div class="access-option">
+                                    <label class="access-label">
+                                        <input type="radio" name="access-type" value="limited">
+                                        <div class="access-content">
+                                            <svg class="access-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                                                <circle cx="9" cy="7" r="4"/>
+                                                <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                                            </svg>
+                                            <div>
+                                                <h4>Limited Users</h4>
+                                                <p>Restrict to specific number of users</p>
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="access-settings" id="geographic-settings" style="display: none;">
+                                <div class="form-group">
+                                    <label for="proximity-radius">Access Radius from Incident</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" id="proximity-radius" class="form-control" placeholder="100" value="100">
+                                        <select class="unit-select">
+                                            <option value="miles">miles</option>
+                                            <option value="km">kilometers</option>
+                                        </select>
+                                    </div>
+                                    <small class="form-help">Only users within this radius can access the simulation</small>
+                                </div>
+                            </div>
+
+                            <div class="access-settings" id="limited-settings" style="display: none;">
+                                <div class="form-group">
+                                    <label for="max-users">Maximum Number of Users</label>
+                                    <input type="number" id="max-users" class="form-control" placeholder="50" min="1" max="1000">
+                                    <small class="form-help">Limit total number of concurrent users</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>Sharing Options</h3>
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="allow-download" checked>
+                                    <span class="checkmark"></span>
+                                    Allow users to download reports
+                                </label>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="allow-sharing">
+                                    <span class="checkmark"></span>
+                                    Allow users to share simulation link
+                                </label>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="require-registration">
+                                    <span class="checkmark"></span>
+                                    Require user registration for access
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>Simulation Expiry</h3>
+                            <div class="form-group">
+                                <label for="expiry-duration">Simulation Available For</label>
+                                <select id="expiry-duration" class="form-control">
+                                    <option value="24">24 hours</option>
+                                    <option value="72">3 days</option>
+                                    <option value="168" selected>1 week</option>
+                                    <option value="720">1 month</option>
+                                    <option value="0">No expiry</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="deployment-summary">
+                            <h3>Deployment Summary</h3>
+                            <div class="summary-card">
+                                <div class="summary-item">
+                                    <span class="summary-label">Simulation Tier:</span>
+                                    <span class="summary-value" id="summary-tier">Base</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="summary-label">Access Type:</span>
+                                    <span class="summary-value" id="summary-access">Anyone with Link</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="summary-label">Duration:</span>
+                                    <span class="summary-value" id="summary-duration">24 hours</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="summary-label">Expiry:</span>
+                                    <span class="summary-value" id="summary-expiry">1 week</span>
+                                </div>
+                                <div class="summary-item total">
+                                    <span class="summary-label">Total Cost:</span>
+                                    <span class="summary-value" id="summary-cost">Demo</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="form-navigation">
+                    <button type="button" class="btn-secondary" id="prev-btn" style="display: none;">
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 12H5"/>
+                            <path d="M12 19l-7-7 7-7"/>
+                        </svg>
+                        Previous
+                    </button>
+                    
+                    <button type="button" class="btn-primary" id="next-btn">
+                        Next
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14"/>
+                            <path d="M12 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                    
+                    <button type="button" class="btn-success" id="deploy-btn" style="display: none;">
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 4V2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v2"/>
+                            <path d="M7 4h10v16a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V4Z"/>
+                            <path d="M9 9h6"/>
+                            <path d="M9 13h6"/>
+                        </svg>
+                        Deploy Simulation
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="configure-script.js"></script>
+    <script>
+        async function fetchUploadCaseData(){
+            const url = 'http://localhost:5000/api/access_data';
+            
+            const response = await fetch(url);
+            const data = await response.json();
+            console.log(data);
+            const upload_details=document.getElementById('upload_info')
+            const fileName = data.fileName;
+            upload_details.innerHTML = `Uploaded File: ${fileName}`;
+  
+    }
+
+        fetchUploadCaseData()
+
+        function openFile(){
+
+            window.open('https://0x5D35Da0Ac1B7698e5e5eB49eff5AF9a94058615c.calibration.filcdn.io/baga6ea4seaqeaizbme7kqjy5tqgj2kftzm2krjghkahbniu757fqq23eu6paeei', '_blank');
+
+        }
+
+
+        async function weatherUpdate(){
+
+            const url = 'https://pro.weatherxm.com/api/v1/stations/0d5a1940-bf54-11ed-9972-4f669f2d96bd/latest';
+            const options = {method: 'GET', headers: {Accept: 'application/json', 'X-API-KEY': '9fd1da91-9e69-449f-9562-076c752155ce'}};
+
+            
+            const response = await fetch(url, options);
+            const data = await response.json();
+            console.log(data);
+            console.log(data.observation.temperature)
+            const weatherData = {
+                station_lat:"",
+                station_long:"",
+                station_elevation:"",
+                temperature: data.observation.temperature,
+                humidity: data.observation.humidity,
+                windSpeed: data.observation.wind_speed,
+                windDirection: data.observation.wind_direction,
+                pressure: data.observation.pressure,
+                visibility: 10
+            };
+            const weatherStatus = document.querySelector('.weather-loading');
+            weatherStatus.innerHTML = `
+                <div><p> Station Handsome Chili Summer: 'Lat': 38.87125, 'Lon': -77.44299, 'Elevation': 80 </p> </div>
+                <div class="weather-results">
+                    <h4>Current Weather Conditions</h4>
+                    <div class="weather-grid">
+                        <div class="weather-item">
+                            <span class="weather-label">Temperature:</span>
+                            <span class="weather-value">${weatherData.temperature}°F</span>
+                        </div>
+                        <div class="weather-item">
+                            <span class="weather-label">Wind:</span>
+                            <span class="weather-value">${weatherData.windSpeed} mph from ${weatherData.windDirection}</span>
+                        </div>
+                        <div class="weather-item">
+                            <span class="weather-label">Humidity:</span>
+                            <span class="weather-value">${weatherData.humidity}%</span>
+                        </div>
+                        <div class="weather-item">
+                            <span class="weather-label">Pressure:</span>
+                            <span class="weather-value">${weatherData.pressure} hPa</span>
+                        </div>
+                      
+                    </div>
+                    <p class="weather-timestamp">Last updated: ${new Date().toLocaleTimeString()}</p>
+                </div>
+            `;
+
+        };
+
+
+
+    </script>
+</body>
+</html>

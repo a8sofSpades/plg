@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optimize Threat Model - Threat Warning Dashboard</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="optimize-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="optimize-page">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="header-left">
+                    <div class="logo">
+                        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/>
+                            <path d="M12 9v4"/>
+                            <path d="M12 17h.01"/>
+                        </svg>
+                    </div>
+                    <div class="header-title">
+                        <h1>Optimize Threat Model</h1>
+                        <p>Enhance your simulation with advanced modeling capabilities</p>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <button class="btn-secondary" onclick="window.location.href='/'">
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 12H5"/>
+                            <path d="M12 19l-7-7 7-7"/>
+                        </svg>
+                        Back to Dashboard
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="optimize-container">
+                <!-- Current Model Status -->
+                <div class="current-model-status">
+                    <div class="status-card">
+                        <div class="status-header">
+                            <h2>Current Active Model</h2>
+                            <div class="status-badge active">RUNNING</div>
+                        </div>
+                        <div class="model-info">
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <span class="label">Incident:</span>
+                                    <span class="value">Chlorine Release - Manassas, VA</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="label">Model Type:</span>
+                                    <span class="value">Base ALOHA Heavy Gas</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="label">Runtime:</span>
+                                    <span class="value">2h 15m</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="label">Accuracy:</span>
+                                    <span class="value">Standard (±15%)</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="label">Update Frequency:</span>
+                                    <span class="value">Every 30 minutes</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="label">Weather Integration:</span>
+                                    <span class="value">Static conditions</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Optimization Options -->
+                <div class="optimization-section">
+                    <div class="section-header">
+                        <h2>Available Model Optimizations</h2>
+                        <p>Upgrade your current simulation with enhanced modeling capabilities for improved accuracy and real-time updates</p>
+                    </div>
+
+                    <div class="optimization-options">
+                        <!-- Enhanced Accuracy Option -->
+                        <div class="optimization-card">
+                            <div class="card-header">
+                                <div class="option-title">
+                                    <h3>Source: AwAIRE Organization</h3>
+                                    <div class="price">Live Wind Speed Adjust</div>
+                                </div>
+                                <div class="accuracy-badge">WeatherXM Data</div>
+                            </div>
+                            
+                            <div class="features-table">
+                                <h4>Description: Refactors initial threat model based on real-time updates from nearest WeatherXM stations</h4>
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>Parameter</td>
+                                            <td class="current">Initial</td>
+                                            <td class="current">Current</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Temperature</td>
+                                            <td class="current">72 F</td>
+                                            <td class="current">72F</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Wind Speed</td>
+                                            <td class="current">6 mph</td>
+                                            <td class="upgraded">11 mph</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Wind Direction</td>
+                                            <td class="current">294</td>
+                                            <td class="upgraded">280</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Humidity</td>
+                                            <td class="current">80%</td>
+                                            <td class="current">82%</td>
+                                        </tr>
+                                      
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="benefits">
+                                <h4>Active Stations</h4>
+                                <ul>
+                                    <li>Handsome Chili Summer</li>
+                                   
+                                </ul>
+                            </div>
+
+                            <button class="select-option-btn" data-option="enhanced" id="apply_changes" onclick="alert('Changes Applied.')">
+                                Apply Changes
+                            </button>
+                        </div>
+
+                        <!-- Real-Time Updates Option -->
+                        <div class="optimization-card">
+                            
+                            <div class="card-header">
+                                <div class="option-title">
+                                    <h3>Source: AwAIRe Organization</h3>
+                                    <div class="price">Inversion Layer Prediction</div>
+                                </div>
+                                <div class="accuracy-badge">WeatherXM</div>
+                            </div>
+                            
+                            <div class="features-table">
+                                <h4>Uses temperature gradient accross georgraphic area to predict presence/formation of inversion layer</h4>
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>Parameter</td>
+                                            <td class="current">Initial</td>
+                                            <td class="current">Current</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Temperature Gradient</td>
+                                            <td class="current">Null</td>
+                                            <td class="current">Null</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Wind Speed Change</td>
+                                            <td class="current">Null</td>
+                                            <td class="current">Null</td>
+                                        </tr>
+                                        
+                                        <tr>
+                                      
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="benefits">
+                                <h4>Active Stations</h4>
+                                <ul>
+                                    <li>Handsome Chili Summer</li>
+                                    <li>Weatherwise Rusty Tropic</li>
+                                 
+                                </ul>
+                            </div>
+
+                            <button class="select-option-btn" data-option="realtime">
+                                Apply Changes 
+                            </button>
+                        </div>
+
+                </div>
+
+                <!-- Deployment Configuration -->
+                <div class="deployment-config" id="deployment-config" style="display: none;">
+                    <div class="config-header">
+                        <h2>Deployment Configuration</h2>
+                        <p>Configure timing and deployment settings for your model optimization</p>
+                    </div>
+
+                    <div class="config-form">
+                        <div class="form-section">
+                            <h3>Selected Optimization</h3>
+                            <div class="selected-option" id="selected-option">
+                                <!-- Will be populated by JavaScript -->
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>Deployment Timing</h3>
+                            <div class="timing-options">
+                                <label class="timing-option">
+                                    <input type="radio" name="deployment-timing" value="immediate" checked>
+                                    <div class="timing-content">
+                                        <h4>Deploy Immediately</h4>
+                                        <p>Replace current model with optimized version</p>
+                                        <small>~2-3 minutes downtime during transition</small>
+                                    </div>
+                                </label>
+                                <label class="timing-option">
+                                    <input type="radio" name="deployment-timing" value="scheduled">
+                                    <div class="timing-content">
+                                        <h4>Schedule Deployment</h4>
+                                        <p>Deploy at a specific time</p>
+                                        <small>Minimize disruption to ongoing operations</small>
+                                    </div>
+                                </label>
+                                <label class="timing-option">
+                                    <input type="radio" name="deployment-timing" value="parallel">
+                                    <div class="timing-content">
+                                        <h4>Parallel Deployment</h4>
+                                        <p>Run both models simultaneously</p>
+                                        <small>Compare results before switching (+$50)</small>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-section" id="scheduled-time" style="display: none;">
+                            <h3>Schedule Details</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="deployment-date">Deployment Date</label>
+                                    <input type="date" id="deployment-date" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="deployment-time">Deployment Time</label>
+                                    <input type="time" id="deployment-time" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>Notification Settings</h3>
+                            <div class="notification-options">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="email-notifications" checked>
+                                    <span class="checkmark"></span>
+                                    Email notifications for deployment status
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="sms-notifications">
+                                    <span class="checkmark"></span>
+                                    SMS alerts for critical updates
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="webhook-notifications">
+                                    <span class="checkmark"></span>
+                                    Webhook integration for external systems
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>Additional Options</h3>
+                            <div class="additional-options">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="backup-current">
+                                    <span class="checkmark"></span>
+                                    Create backup of current model configuration
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="performance-monitoring">
+                                    <span class="checkmark"></span>
+                                    Enable enhanced performance monitoring (+$25)
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="expert-review">
+                                    <span class="checkmark"></span>
+                                    Request expert review before deployment (+$100)
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="deployment-summary">
+                            <h3>Deployment Summary</h3>
+                            <div class="summary-card">
+                                <div class="summary-item">
+                                    <span class="summary-label">Optimization:</span>
+                                    <span class="summary-value" id="summary-optimization">-</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="summary-label">Deployment:</span>
+                                    <span class="summary-value" id="summary-timing">Immediate</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="summary-label">Estimated Downtime:</span>
+                                    <span class="summary-value" id="summary-downtime">2-3 minutes</span>
+                                </div>
+                                <div class="summary-item total">
+                                    <span class="summary-label">Total Cost:</span>
+                                    <span class="summary-value" id="summary-cost">$0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons" id="action-buttons">
+                    <button type="button" class="btn-secondary" id="back-btn" style="display: none;">
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 12H5"/>
+                            <path d="M12 19l-7-7 7-7"/>
+                        </svg>
+                        Back to Options
+                    </button>
+                    
+                    <button type="button" class="btn-success" id="deploy-btn" style="display: none;">
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 4V2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v2"/>
+                            <path d="M7 4h10v16a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V4Z"/>
+                            <path d="M9 9h6"/>
+                            <path d="M9 13h6"/>
+                        </svg>
+                        Deploy New Model
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="optimize-script.js"></script>
+</body>
+</html>
